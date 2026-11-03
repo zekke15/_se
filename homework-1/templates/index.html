@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>CurlLab | HTTP 請求測試工具</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="logo">&gt;_</span><div><strong>CurlLab</strong><small>HTTP REQUEST STUDIO</small></div></div>
+      <span class="tag">Python + Flask</span>
+    </header>
+    <section class="intro"><div class="eyebrow">WEB API TOOLKIT / PROJECT 01</div><h1>讓每一次 HTTP 請求<br><em>都清楚可見。</em></h1><p>發送請求、檢查狀態碼、瀏覽 JSON 回應。透過自己的 Python 後端，學習 curl 的核心概念。</p></section>
+    <section class="workspace" aria-label="HTTP 工作區">
+      <div class="panel request-panel">
+        <div class="panel-title"><div><span class="number">01</span><h2>建立請求</h2></div><span class="hint">REQUEST</span></div>
+        <form id="request-form">
+          <label for="url">Request URL</label>
+          <div class="url-row"><select id="method" aria-label="HTTP 方法"><option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option><option>HEAD</option></select><input id="url" type="url" placeholder="https://jsonplaceholder.typicode.com/todos/1" required value="https://jsonplaceholder.typicode.com/todos/1"></div>
+          <div class="tabs" role="tablist" aria-label="請求參數"><button type="button" role="tab" aria-selected="true" id="headers-tab" data-tab="headers">Headers</button><button type="button" role="tab" aria-selected="false" id="body-tab" data-tab="body">Body</button></div>
+          <div id="headers-panel" role="tabpanel" aria-labelledby="headers-tab"><label for="headers">請求標頭 <span class="muted">（JSON 物件）</span></label><textarea id="headers" spellcheck="false" rows="8">{
+  "Accept": "application/json"
+}</textarea></div>
+          <div id="body-panel" role="tabpanel" aria-labelledby="body-tab" hidden><div class="body-options"><label for="body">請求內容</label><label class="switch"><input type="checkbox" id="json-mode" checked> JSON 格式</label></div><textarea id="body" spellcheck="false" rows="8" placeholder='{"title":"Hello","completed":false}'></textarea><p class="field-help">GET 和 HEAD 不支援傳送 Body。</p></div>
+          <div class="actions"><button class="send-btn" type="submit" id="send">送出請求 <span>↗</span></button><button class="clear-btn" type="button" id="reset">清除結果</button></div>
+        </form>
+        <div class="examples"><span>快速範例</span><button type="button" data-example="get">GET JSON</button><button type="button" data-example="post">POST JSON</button></div>
+      </div>
+      <div class="panel response-panel">
+        <div class="panel-title"><div><span class="number">02</span><h2>回應結果</h2></div><span class="hint">RESPONSE</span></div>
+        <div class="metrics"><div><span>STATUS</span><strong id="status">—</strong></div><div><span>TIME</span><strong id="time">—</strong></div><div><span>SIZE</span><strong id="size">—</strong></div></div>
+        <div class="tabs" role="tablist" aria-label="回應資料"><button type="button" role="tab" aria-selected="true" data-resp="response">Response</button><button type="button" role="tab" aria-selected="false" data-resp="response-headers">Headers</button></div>
+        <div class="response-toolbar"><span id="result-label">等待發送請求…</span><button type="button" id="copy">複製內容</button></div>
+        <pre id="output" tabindex="0">{
+  "message": "Ready to send your first request"
+}</pre>
+        <p class="notice" id="notice" role="status" aria-live="polite">輸入網址並點擊「送出請求」開始。</p>
+      </div>
+    </section>
+    <footer><span>CurlLab · 習題 1 / 類似 curl 的網頁工具</span><span>僅供本機學習與測試</span></footer>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
