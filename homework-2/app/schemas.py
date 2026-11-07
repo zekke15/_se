@@ -1,0 +1,34 @@
+from pydantic import BaseModel, Field, EmailStr
+from typing import Literal
+class LoginIn(BaseModel):
+    username: str
+    password: str
+class StudentCreate(BaseModel):
+    student_id: str=Field(min_length=3,max_length=25)
+    name: str=Field(min_length=1,max_length=60)
+    email: EmailStr
+    department: str='資訊工程學系'
+    enrollment_year: int=Field(ge=1990,le=2100)
+class CourseCreate(BaseModel):
+    code: str=Field(min_length=2,max_length=30)
+    name: str=Field(min_length=1,max_length=120)
+    credits: int=Field(ge=1,le=10)
+    capacity: int=Field(ge=1,le=1000)
+    teacher: str=''
+    semester: str='115-1'
+    day: int=Field(ge=1,le=5)
+    start: int=Field(ge=1,le=12)
+    length: int=Field(ge=1,le=9)
+    room: str=''
+    category: str='專業選修'
+class ProfileUpdate(BaseModel):
+    name: str=Field(min_length=1,max_length=60)
+    email: EmailStr
+    phone: str=Field(max_length=40)
+class LeaveCreate(BaseModel):
+    date: str=Field(pattern=r'^\d{4}-\d{2}-\d{2}$')
+    kind: Literal['事假','病假','公假','其他']
+    period: str=Field(min_length=1,max_length=30)
+    reason: str=Field(min_length=2,max_length=300)
+class GradeUpdate(BaseModel):
+    grade: int=Field(ge=0,le=100)
