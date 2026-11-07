@@ -1,0 +1,2 @@
+-r backend/requirements-dev.txt
+pytest-playwright>=0.6,<1
